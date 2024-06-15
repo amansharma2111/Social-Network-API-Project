@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+  user-service:
+    build: ./user-service
+    ports:
+      - "8001:8000"
+    environment:
+      - DATABASE_URL=postgres://user:password@db:5432/userdb
+
+  discussion-service:
+    build: ./discussion-service
+    ports:
+      - "8002:8000"
+    environment:
+      - DATABASE_URL=postgres://user:password@db:5432/discussiondb
+
+  comment-service:
+    build: ./comment-service
+    ports:
+      - "8003:8000"
+    environment:
+      - DATABASE_URL=postgres://user:password@db:5432/commentdb
+
+  like-service:
+    build: ./like-service
+    ports:
+      - "8004:8000"
+    environment:
+      - DATABASE_URL=postgres://user:password@db:5432/likedb
+
+  auth-service:
+    build: ./auth-service
+    ports:
+      - "8005:8000"
+    environment:
+      - DATABASE_URL=postgres://user:password@db:5432/authdb
+
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: userdb
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
